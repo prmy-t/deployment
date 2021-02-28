@@ -55,12 +55,23 @@ export default {
   /*
    ** Nuxt.js modules
    */
-  modules: [],
+  modules: ["@nuxtjs/axios"],
+  axios: {
+    baseURL: "http://localhost:3000",
+    https: false
+  },
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
    */
   vuetify: {
+    defaultAssets: {
+      font: true,
+      icons: "md"
+    },
+    icons: {
+      iconfont: "md"
+    },
     customVariables: ["~/assets/variables.scss"],
     theme: {
       dark: false,
