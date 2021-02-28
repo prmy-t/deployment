@@ -19,7 +19,7 @@
     <v-row justify="center">
       <v-col
         v-for="catagory in catagories"
-        :key="catagory"
+        :key="catagory.title"
         xs="12"
         sm="4"
         md="3"
@@ -34,15 +34,16 @@
         >
           <v-row>
             <v-col align="center">
-              <v-icon x-large>drafts</v-icon>
-              <p>{{ catagory }}</p>
+              <v-icon x-large>{{ catagory.icon }}</v-icon>
+              <p class="mt-1">{{ catagory.title }}</p>
             </v-col>
           </v-row>
           <v-row>
             <v-col align="center">
               <v-btn
+                small
                 color="yellow darken-1 indigo--text"
-                @click="catagorySelect(catagory)"
+                @click="catagorySelect(catagory.title)"
               >
                 explore<v-icon small>arrow_forward_ios</v-icon>
               </v-btn>
@@ -59,10 +60,10 @@ export default {
   data() {
     return {
       catagories: [
-        "Computer Science",
-        "Current Affairs",
-        "Medical",
-        "Government Exams"
+        { title: "Computer Science", icon: "laptop_mac" },
+        { title: "Current Affairs", icon: "online_prediction" },
+        { title: "Medical", icon: "medical_services" },
+        { title: "Government Exams", icon: "gavel" }
       ]
     };
   },
