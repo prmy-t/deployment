@@ -13,18 +13,17 @@
             <p class="text-h4">Log In</p>
           </v-card-title>
           <v-container>
-            <!-- <v-row>
-              <v-alert
-                class="ml-3"
-                :value="error"
+            <v-row justify="center"
+              ><v-alert
+                :value="flag"
                 outlined
                 dense
                 type="error"
-                color="red"
+                color="yellow darken-2"
               >
                 Email or Password is wrong!
-              </v-alert>
-              </v-row> -->
+              </v-alert></v-row
+            >
             <form @submit.prevent="submitForm">
               <v-card-text>
                 <v-row>
@@ -80,9 +79,60 @@
 <script>
 export default {
   layout: "admin",
+  data() {
+    return {
+      email: "",
+      password: "",
+      flag: false,
+      value: true,
+      emailRules: [v => !!v || "email is required"],
+      passwordRules: [v => !!v || "Password is required"]
+    };
+  },
+  computed: {
+    isLoggedIn: {
+      get() {
+        return this.$store.state.auth.isLoggedIn;
+      },
+      set(isLoggedIn) {
+        this.$store.commit("auth/SET_ISLOGGEDIN", isLoggedIn);
+      }
+    },
+    validRecord() {
+      let status = false;
+      const validEmail = this.email;
+      const validPassword = this.password.length;
+
+      if (validPassword >= 5 && validEmail) {
+        status = true;
+      }
+      return status;
+    }
+  },
   methods: {
-    login() {
-      this.$router.push("/admin-login/add-mcqs");
+    submitForm() {},
+    async login() {
+      this.isLoggedIn = true;
+      const email = this.email;
+      const password = this.password;
+
+      const res = await this.$axios.post("http://localhost:3000/", {
+        email,
+        password
+      });
+      if (res) {
+        if (res.data.flag) {
+          this.flag = res.data.flag;
+        }
+
+        const token = res.data.token ? res.data.token : null;
+        if (token) {
+          this.$router.push("/admin-login/edit-site");
+          this.$setCookie("token", token);
+          this.$axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+          this.isLoggedIn = true;
+        }
+      }
     }
   }
 };

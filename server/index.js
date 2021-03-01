@@ -2,18 +2,19 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const cors = require("cors");
 const db_url =
   "mongodb+srv://prmy:qwer1234@cluster0-wzjug.mongodb.net/mcqApp?authSource=admin&replicaSet=Cluster0-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true";
-const cors = require("cors");
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
-// local import
 // const publicRoutes = require("./routes/publicRoute");
 const adminRoutes = require("./routes/adminRoute");
 
 // app.use(publicRoutes);
 app.use(adminRoutes);
-
-app.use(cors());
 
 mongoose
   .connect(db_url, {

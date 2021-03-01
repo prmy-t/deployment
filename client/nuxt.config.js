@@ -42,7 +42,7 @@ export default {
    ** Plugins to load before mounting the App
    ** https://nuxtjs.org/guide/plugins
    */
-  plugins: [],
+  plugins: ["@/plugins/globalFunctions"],
   /*
    ** Auto import components
    ** See https://nuxtjs.org/api/configuration-components
@@ -57,9 +57,13 @@ export default {
    */
   modules: ["@nuxtjs/axios"],
   axios: {
+    proxy: true,
     baseURL: "http://localhost:3000",
-    https: false
+
+    proxyHeaders: false,
+    credentials: false
   },
+
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module
