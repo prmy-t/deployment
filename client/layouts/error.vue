@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Header from "../components/header";
+import Header from "../components/public/header";
 import Footer from "../components/footer";
 export default {
   layout: "empty",

@@ -1,34 +1,32 @@
 <template>
-  <v-main>
-    <v-row align="center">
-      <v-col md="8" sm="12" xs="12">
-        <p class="text-h3 ml-8">Welcome to Reading Area</p>
-        <p class="text-h5 ml-8 font-weight-light">
-          Browse and Learn Your Favorite Catagories.
-        </p>
-      </v-col>
-      <v-col md="4" sm="8" xs="12">
-        <v-img
-          max-height="auto"
-          width="auto"
-          :src="`/images/reading-tag.jpg`"
-        ></v-img>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col align="center">
-        <p class="text-h4">Catagories</p>
-      </v-col>
-    </v-row>
-    <Catagories :catagories="catagories" />
-    <v-row></v-row>
-  </v-main>
+  <div>
+    <Header />
+    <v-main class="mb-5 #f5f5f5">
+      <v-row class="mt-10"></v-row>
+      <v-row align="center">
+        <v-col class="" align="center" md="12" sm="12" xs="12">
+          <p class="text-h3 ml-8 font-weight-bold">
+            Pakistan's Biggest Learning Source
+          </p>
+          <p class="text-h5 ml-8 font-weight-light">
+            Browse and Learn Your Favorite Catagories.
+          </p>
+        </v-col>
+      </v-row>
+      <Catagories :catagories="catagories" />
+    </v-main>
+  </div>
 </template>
 
 <script>
+import Header from "../components/public/header";
 import Catagories from "../components/public/catagories";
 export default {
-  components: { Catagories },
+  components: { Catagories, Header },
+  data() {
+    return {};
+  },
+  computed: {},
   data() {
     return {
       catagories: [
