@@ -74,6 +74,7 @@
 <script>
 import HEADER from "../../components/admin/header";
 export default {
+  layout: "admin",
   components: { HEADER },
   data() {
     return {
@@ -108,7 +109,23 @@ export default {
   methods: {
     submitForm() {},
     async login() {
-      this.$router.push("/admin/edit-site");
+      const res = await this.$axios.post("http://localhost:3000/admin/login", {
+        email: this.email,
+        password: this.password
+      });
+      if (res) {
+        if (res.data.flag) {
+          this.flag = res.data.flag;
+        }
+        const token = res.data.token ? res.data.token : null;
+        if (token) {
+          this.$router.push("/admin/edit-site");
+          // localStorage.setItem("token", token);
+          this.$setCookie("token", token);
+          this.$axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+          this.isLoggedIn = true;
+        }
+      }
     }
   }
 };

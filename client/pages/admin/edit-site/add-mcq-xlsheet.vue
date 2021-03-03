@@ -1,15 +1,29 @@
 <template>
   <div>
     <Header />
-    <v-main class="indigo lighten-5">
-      <v-row align="center" class="red">
-        <v-col align="center"> <v-btn>< back</v-btn> </v-col>
-      </v-row>
-      <v-row>
-        <v-col>
-          <h2>hello</h2>
-        </v-col>
-      </v-row>
+    <v-main color="#f2f2f2">
+      <v-container>
+        <v-row justify="center">
+          <v-col cols="12" md="6">
+            <v-card>
+              <v-card-title> Select file from machine </v-card-title>
+              <v-card-text>
+                <v-file-input
+                  accept="image/jpg"
+                  chips
+                  outlined
+                  dense
+                  multiple
+                  show-size
+                  multiple
+                  prepend-icon="description"
+                  label="Select file"
+                ></v-file-input>
+              </v-card-text>
+            </v-card>
+          </v-col>
+        </v-row>
+      </v-container>
     </v-main>
   </div>
 </template>
@@ -17,6 +31,7 @@
 <script>
 import Header from "../../../components/admin/header";
 export default {
+  layout: "admin",
   components: { Header }
 };
 </script>

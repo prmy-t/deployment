@@ -14,16 +14,17 @@
             <v-icon>description </v-icon>
           </v-btn>
         </template>
-        <v-sheet class="text-center" height="250px" rounded="lg">
+        <v-sheet class="text-center" height="auto" width="auto" rounded="lg">
           <v-row justify="space-between" align="center">
-            <v-col align="start " class="text-h6 ml-5" cols="12" md="7" sm="7">
-              Select From Catagories
-            </v-col>
+            <v-spacer></v-spacer>
             <v-col justify="top" align="end" cols="12" md="4" sm="4">
               <v-btn class="mr-3" text color="error" @click="sheet = !sheet">
                 close
               </v-btn>
             </v-col>
+            <!-- <v-col align="start " class="text-h6 ml-5" cols="12" md="7" sm="7">
+              Select From Catagories
+            </v-col> -->
           </v-row>
           <v-container>
             <v-row class="mt-1 ml-8 mr-8">
@@ -31,17 +32,18 @@
                 v-for="item in catagories"
                 :key="item.title"
                 cols="12"
-                md="4"
-                sm="6"
+                md="6"
+                sm="12"
               >
                 <v-btn
                   @click="selectCatagory(item.title)"
-                  width="auto"
+                  width="300"
                   class="ml-2 mr-2"
                   ><v-icon left>{{ item.icon }}</v-icon> {{ item.title }}
                 </v-btn>
               </v-col>
             </v-row>
+            <v-row class="mb-8"></v-row>
           </v-container>
         </v-sheet>
       </v-bottom-sheet>
@@ -52,6 +54,8 @@
         <v-icon>restore_page </v-icon>
       </v-btn>
     </v-bottom-navigation>
+
+    <!-- SNACKBAR -->
     <v-snackbar dark color="grey darken-3" v-model="snackbar" timeout="2000">
       Coming Soon
       <template v-slot:action="{ attrs }">

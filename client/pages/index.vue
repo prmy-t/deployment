@@ -1,14 +1,14 @@
 <template>
   <div>
     <Header />
-    <v-main class="mb-5 #f5f5f5">
+    <v-main :id="target" class="mb-5 #f5f5f5">
       <v-row class="mt-10"></v-row>
       <v-row align="center">
-        <v-col class="" align="center" md="12" sm="12" xs="12">
-          <p class="text-h3 ml-8 font-weight-bold">
+        <v-col align="center" md="12" sm="12" xs="12">
+          <p class="text-h3  font-weight-bold">
             Pakistan's Biggest Learning Source
           </p>
-          <p class="text-h5 ml-8 font-weight-light">
+          <p class="text-h5  font-weight-light">
             Browse and Learn Your Favorite Catagories.
           </p>
         </v-col>
@@ -36,6 +36,16 @@ export default {
         { title: "Government Exams", icon: "gavel" }
       ]
     };
+  },
+  computed: {
+    target: {
+      get() {
+        return this.$store.state.scroll.target;
+      },
+      set(target) {
+        this.$store.commit("auth/SET_TARGET", target);
+      }
+    }
   },
   mounted() {
     this.currentMode = "reading";
