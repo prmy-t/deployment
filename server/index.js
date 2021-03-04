@@ -6,7 +6,7 @@ const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
 require("dotenv").config();
-const port = process.env.PORT || 3000;
+const port = 3000 || process.env.PORT;
 const db_url =
   "mongodb+srv://prmy:qwer1234@cluster0-wzjug.mongodb.net/mcqApp?authSource=admin&replicaSet=Cluster0-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true";
 app.use(bodyParser.urlencoded({ extended: false }));
