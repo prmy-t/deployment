@@ -5,6 +5,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
+require("dotenv").config();
+const port = process.env.PORT || 3000;
 const db_url =
   "mongodb+srv://prmy:qwer1234@cluster0-wzjug.mongodb.net/mcqApp?authSource=admin&replicaSet=Cluster0-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true";
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -28,7 +30,10 @@ mongoose
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
-  .then(() => app.listen(3000))
+  .then(() => {
+    app.listen(port);
+    console.log(`listening at port ${port}`);
+  })
   .catch((err) => {
     console.log(err);
   });

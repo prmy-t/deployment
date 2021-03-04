@@ -19,7 +19,12 @@
         </b></v-toolbar-title
       >
       <v-spacer></v-spacer>
-      <div v-if="$vuetify.breakpoint.mdOnly && isLoggedIn === true">
+      <div
+        v-if="
+          $vuetify.breakpoint.mdOnly ||
+            ($vuetify.breakpoint.lgOnly && isLoggedIn === true)
+        "
+      >
         <v-btn @click="homeEvent" plain>home</v-btn>
         <v-btn plain>contact</v-btn>
         <v-btn plain>privacy policy</v-btn>
@@ -27,7 +32,10 @@
 
       <v-spacer></v-spacer>
       <v-btn
-        v-if="$vuetify.breakpoint.mdOnly && isLoggedIn === true"
+        v-if="
+          $vuetify.breakpoint.mdOnly ||
+            ($vuetify.breakpoint.lgOnly && isLoggedIn === true)
+        "
         dark
         depressed
         @click="logOut"

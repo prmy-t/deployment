@@ -3,19 +3,19 @@
     <Header />
     <v-main>
       <v-container fill-height fluid>
-        <v-row class="mt-8" justify="space-around">
+        <v-row align="stretch" class="mt-8" justify="space-around">
           <v-col cols="12" sm="6" xs="12" md="5">
-            <v-card height="180" rounded="lg" color="#f2f2f2">
+            <v-card height="auto" rounded="lg" color="#f2f2f2">
               <v-card-title class="font-weight-bold text-h5">
                 Edit Existing MCQs
               </v-card-title>
-              <v-card-text>
+              <v-card-text style="overflow-y: auto; height:128px">
                 Browse catagory wise MCQs.<br />
                 Add & Edit MCQs.
               </v-card-text>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn dark color="red"
+                <v-btn @click="editMcqs" dark color="red"
                   >Enter <v-icon right>chevron_right</v-icon>
                 </v-btn>
               </v-card-actions>
@@ -50,15 +50,21 @@
                     </v-alert>
                   </v-col>
                 </v-row>
-                <v-row>
+                <!-- <v-row>
                   <v-spacer></v-spacer>
                   <v-col cols="12" md="4">
                     <v-btn @click="xlSheet" dark color="red"
                       >Upload <v-icon right>upload</v-icon>
                     </v-btn>
                   </v-col>
-                </v-row>
+                </v-row> -->
               </v-card-text>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn @click="xlSheet" dark color="red"
+                  >Upload <v-icon right>upload</v-icon></v-btn
+                >
+              </v-card-actions>
             </v-card>
           </v-col>
         </v-row>
@@ -100,8 +106,8 @@ export default {
     }
   },
   methods: {
-    singleEntry() {
-      this.$router.push("edit-site/add-mcq");
+    editMcqs() {
+      this.$router.push("edit-site/edit-mcqs");
     },
     async xlSheet() {
       let formData = new FormData();

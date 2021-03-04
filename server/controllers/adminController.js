@@ -2,6 +2,7 @@ const jwt = require("jsonwebtoken");
 const fs = require("fs");
 const xlsx = require("xlsx");
 const Mcq = require("../models/mcq");
+
 exports.postLogin = (req, res, next) => {
   const email = req.body.email;
   const password = req.body.password;
@@ -28,23 +29,36 @@ exports.postFileUpload = (req, res, next) => {
     var ws = wb.Sheets["Sheet1"];
     const data = xlsx.utils.sheet_to_json(ws);
     console.log(data);
-    // const newData = data.map((record) => {
-    //   const mcq = new Mcq({
-    //     question: record.question,
-    //     optionA: record.option1,
-    //     optionB: record.option2,
-    //     optionC: record.option3,
-    //     optionD: record.option4,
-    //     answer: record.answer,
-    //     category: record.Category,
-    //     tags: record.Tags,
-    //   });
-    //   mcq.save().then();
-    //   return record;
-    // });
 
     res.send({ saved: true });
   } else {
     res.send({ empty: true });
   }
+};
+
+exports.postAddMcq = (req, res, next) => {
+  const question = req.body.question;
+  const category = req.body.category;
+  const tags = req.body.tags;
+  const optionA = req.body.optionA;
+  const optionB = req.body.optionB;
+  const optionC = req.body.optionC;
+  const optionD = req.body.optionD;
+  const answer = req.body.answer;
+  const mcq = new Mcq({
+    question: question,
+    optionA: optionA,
+    optionB: optionB,
+    optionC: optionC,
+    optionD: optionD,
+    answer: answer,
+    category: category,
+    tags: tags,
+  });
+  mcq
+    .save()
+    .then(() => {
+      res.send("saved");
+    })
+    .catch((err) => console.log(err));
 };
