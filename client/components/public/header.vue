@@ -1,6 +1,7 @@
 <template>
   <div>
     <v-app-bar
+      height="72"
       elevate-on-scroll
       app
       flat
@@ -8,16 +9,17 @@
       color="gray lighten-3"
       :scroll-target="target"
     >
-      <v-app-bar-nav-icon
-        v-if="$vuetify.breakpoint.smAndDown"
-        @click.stop="drawer = !drawer"
-      ></v-app-bar-nav-icon>
-      <v-avatar size="25" class="ml-5 mr-2" color="red"> </v-avatar>
-      <v-toolbar-title
-        ><b class="font-weight-bold text-h4 red--text"
-          >Path.pk
-        </b></v-toolbar-title
-      >
+      <v-toolbar-title>
+        <router-link to="/">
+          <v-img
+            class="mt-2 mb-2"
+            src="/images/pathLogo.png"
+            max-height="120"
+            max-width="230"
+            contain
+          ></v-img>
+        </router-link>
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <div v-if="$vuetify.breakpoint.md || $vuetify.breakpoint.lg">
         <v-btn @click="homeEvent" plain>home</v-btn>

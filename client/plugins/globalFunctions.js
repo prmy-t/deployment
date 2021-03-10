@@ -3,6 +3,9 @@ import axios from "axios";
 import Cookie from "js-cookie";
 const SimpleCrypto = require("simple-crypto-js").default;
 const myCrypto = new SimpleCrypto("myKey");
+const VueAnalytics = require("vue-analytics").default;
+
+Vue.use(VueAnalytics, { id: "G-XJL64P2XCX" });
 
 Vue.prototype.$updateUser = async userId => {
   const student = await axios.post("http://localhost:3000/student/getstudent", {

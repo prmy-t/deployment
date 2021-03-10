@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const mcqSchema = mongoose.Schema({
+  date: "",
   question: String,
   optionA: String,
   optionB: String,
@@ -8,7 +9,9 @@ const mcqSchema = mongoose.Schema({
   optionD: String,
   answer: String,
   category: String,
-  tags: String,
+  subCategory: String,
+  childCategory: String,
+  tags: [],
 });
 
 module.exports = mongoose.model("Mcq", mcqSchema);

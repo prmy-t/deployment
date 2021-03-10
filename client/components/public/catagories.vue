@@ -6,7 +6,7 @@
           v-model="search"
           class="ml-2"
           prepend-inner-icon="search"
-          placeholder="Search catagories"
+          placeholder="Search categories"
           filled
           rounded
         >
@@ -18,15 +18,15 @@
       <v-row>
         <v-col align="start">
           <p class="text-h4 font-weight-bold ml-3">
-            Catagories
+            categories
           </p>
         </v-col>
       </v-row>
       <v-row justify="start" no-gutters>
         <v-col
           align="center"
-          v-for="catagory in filteredCatagories"
-          :key="catagory.title"
+          v-for="category in filteredCategories"
+          :key="category"
           class="mb-5"
           cols="12"
           xs="12"
@@ -46,14 +46,14 @@
             </v-row>
             <v-row>
               <v-col align="center">
-                <v-icon color="red" x-large>{{ catagory.icon }}</v-icon>
-                <p class="red--text text-h5 mt-1">{{ catagory.title }}</p>
+                <v-icon color="red" x-large></v-icon>
+                <p class="red--text text-h5 mt-1">{{ category }}</p>
               </v-col>
             </v-row>
             <v-row dense>
               <v-col class="mb-3" align="center">
                 <a
-                  @click="buttonEvent(catagory.title)"
+                  @click="buttonEvent(catgory.title)"
                   class=" grey--text text-h6 "
                   >20 Sub Categories</a
                 >
@@ -64,10 +64,10 @@
         <v-col
           md="12"
           class="mt-5 mb-10"
-          v-if="filteredCatagories && !filteredCatagories.length"
+          v-if="categories && !categories.length"
         >
           <p class="text-h6" align="center">
-            No Catagory Found<v-icon class="ml-1 mb-1"
+            No Category Found<v-icon class="ml-1 mb-1"
               >sentiment_very_dissatisfied
             </v-icon>
           </p>
@@ -79,7 +79,7 @@
 <script>
 export default {
   props: {
-    catagories: Array
+    categories: {}
   },
   data() {
     return {
@@ -87,12 +87,16 @@ export default {
     };
   },
   computed: {
-    filteredCatagories() {
-      return this.catagories.filter(catagory => {
-        return catagory.title.match(this.formateSearch(this.search));
-      });
+    filteredCategories() {
+      if (this.categories.length > 0)
+        if (this.categories) {
+          return this.categories.filter(category => {
+            return category.match(this.formateSearch(this.search));
+          });
+        }
     }
   },
+  mounted() {},
   methods: {
     formateSearch(search) {
       if (search) {

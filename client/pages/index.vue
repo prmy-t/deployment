@@ -13,7 +13,7 @@
           </p>
         </v-col>
       </v-row>
-      <Catagories :catagories="catagories" />
+      <Catagories :categories="categories" />
     </v-main>
   </div>
 </template>
@@ -29,12 +29,7 @@ export default {
   computed: {},
   data() {
     return {
-      catagories: [
-        { title: "Computer Science", icon: "laptop_mac" },
-        { title: "Current Affairs", icon: "online_prediction" },
-        { title: "Medical", icon: "medical_services" },
-        { title: "Government Exams", icon: "gavel" }
-      ]
+      categories: {}
     };
   },
   computed: {
@@ -49,9 +44,19 @@ export default {
   },
   mounted() {
     this.currentMode = "reading";
+    this.categoryData();
   },
   methods: {
-    catagorySelect(name) {
+    async categoryData() {
+      const res = await this.$axios.get(
+        "http://localhost:3000/get-mcq-catagories"
+      );
+      if (res) {
+        console.log(res.data.categories);
+        this.categories = res.data.categories;
+      }
+    },
+    categorySelect(name) {
       const url = name.split(" ").join("-");
       console.log(url);
       this.$router.push("/" + url);

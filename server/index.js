@@ -7,11 +7,12 @@ const fileUpload = require("express-fileupload");
 const cors = require("cors");
 require("dotenv").config();
 const port = 3000 || process.env.PORT;
-const db_url =
-  "mongodb+srv://prmy:qwer1234@cluster0-wzjug.mongodb.net/mcqApp?authSource=admin&replicaSet=Cluster0-shard-0&w=majority&readPreference=primary&appname=MongoDB%20Compass&retryWrites=true&ssl=true";
+
+mongoose.set("useFindAndModify", false);
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 app.use(cors());
+app.use(express.static("public"));
 app.use(
   fileUpload({
     useTempFiles: true,
@@ -19,14 +20,14 @@ app.use(
   })
 );
 
-// const publicRoutes = require("./routes/publicRoute");
+const publicRoutes = require("./routes/publicRoute");
 const adminRoutes = require("./routes/adminRoute");
 
-// app.use(publicRoutes);
+app.use(publicRoutes);
 app.use(adminRoutes);
-
+// console.log(process.env.MONGO_URL + " this is port");
 mongoose
-  .connect(db_url, {
+  .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
